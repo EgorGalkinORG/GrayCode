@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Мої QR-Codes | QRcode Aqua
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'my_qrs/css/my_qrs.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="header">
+        <h2 class="my_qrs">Мої QR-Codes:</h2>
+        <form method="post" class="filters">
+            {% csrf_token %}
+            <h3 class="filter">Filter:</h3>
+            <select name="sorting-type" class="filter_input">
+                <option value="a-z">Сортирувати від A до Z</option>
+                <option value="z-a">Сортирувати від Z до A</option>
+                <option value="from-today">Сортирувати за найближчою датою створення</option>
+                <option value="from-old">Сортирувати за найдавнішою датою створення</option>
+            </select>
+            <!-- <input type="select" class="filter_input"> -->
+            <button class="search_button" name="button" value="filter" type="submit">
+                <img class="search_img" src="{% static 'my_qrs/imgs/search.png' %}" alt="search">
+            </button>
+        </form>
+    </div>
+    {% if qrcodes %}
+        <div class="qr-codes">
+            {% for qrcode in qrcodes %}
+                <div class="qrcode">
+                    <img src="{{ qrcode.qrcode_img.url }}" style="width: 275px; height:275px;">
+                    <p class="date-creation">Date: {{ qrcode.date }}</p>
+                    <p class="title-qr-code">{{ qrcode.name }}</p>
+                    <div>
+                        <a href="{{ qrcode.qrcode_img.url }}" class="download" download="">Download</a>
+                        <form method="post">
+                            {% csrf_token %}
+                            <button class="delete" name="button" value="delete-{{ qrcode.name }}-{{ qrcode.id }}">
+                                <img src="{% static 'my_qrs/imgs/delete.png' %}">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="without-qrcodes-div">
+            <h5 class="without-qrcodes">У вас немає жодного QRкода</h5>
+        </div>
+    {% endif %}
+
+    {% if popup_alert %}
+        <div class="bg-popup"></div>
+        <form method="post" class="popup">
+            {% csrf_token %}
+            <div id="d1">
+                <h2>Ви дійсно хочете видалити {{ delete_name }}?</h2>
+                <p class="p-popup">Якщо Ви його видалите, тоді цей QRкод буде повністью видален <br> та він не буде підтримуватися</p>
+            </div>
+            <div id="d2">
+                <button value="safe" name="button" class="safe-popup">Оставити</button>
+                <button value="deleteqr-{{ delete_qrcode }}" name="button" class="delete-popup">Видалити</button>
+            </div>
+        </form>
+    {% endif %}
+
+{% endblock %}
