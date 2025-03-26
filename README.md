@@ -1,4 +1,4 @@
-# Project "QRCode Aqua"
+# Project "GrayCode"
 ## Navigation / Навігація:
 > [!TIP]
 > - [Main information](#main-information-of-project--основна-інформація-про-проект)
@@ -23,7 +23,7 @@
 > - Figjam
 > - git
 > - Github
-### QRCode Aqua project can do / QRCode Aqua project може робити:
+### GrayCode project can do / GrayCode project може робити:
 - Generate and save customizated QR-codes / Генерує а також зберігає кастомізовані QR-коди 
 - Can changing type of subcribes with payment methods / Може змінюваати типи підписок с оплачуваними методами
 - Saves every qr-code who was created by user / Зберігає кожжний QR-код який був створений користувачем
@@ -48,7 +48,7 @@ ____
 # Project structure / Структура проєкту:
 ```mermaid
 flowchart TD
-    Project{QRcode-Aqua}
+    Project{GrayCode}
     db[(db.sqlite3)]
     templates[/templates/]
     static[/static/]
@@ -177,12 +177,12 @@ ____
 > Also you need install .git for clone project.
 ### For first, you need to clone this repository with command / Для початку вам потрібно скопіювати проект с командою:
 ```
-git clone https://github.com/IllyaShramko/QRcode-Aqua.git
+git clone https://github.com/IllyaShramko/GrayCode.git
 ```
 ### Second, you need to create venv and install all requirements who typed bottom for correctly work project / По-друг, вам потрібно створити venv і встановити всі біблеотеки з файлу requirements, які перечислені внизу для коректної роботи проекту:
 #### You can create and activate venv for 3 commands / Ви можете створити та активувати віртуальне оточення з допомоги 3 команд:
 ```
-cd QRcode-aqua
+cd GrayCode
 ```
 On Windows console:
 ```
@@ -202,13 +202,9 @@ source venv/bin/activate
 ### Third, libraries which you need to install for run the project / По-третє, модулі, які вам знадобиться установити для роботи проекту:
 > [!NOTE]
 > 1. `django`, it's main module for work all project, without he project won't be started! / `django` це головний модуль для роботи всього проекту, без нього проект не запуститься!
-
 > 2. `os` need for manupilate files, save qrcodes etc. / `OS` потрібен для маніпулювання файлами та збереження qr-кодів, тощо.
-
 > 3. `qrcode`, it's main module for generate qrcodes, without he project can started, but doesn't generate qrcodes / `qrcode`, це основний модуль для створення qr-кодів, без нього можна запустити проект, але не буде генерувати qr-коди
-
 > 4. `pillow`, it's needed for work module `qrcode` / `pillow`, потрібен для роботи модуля `qrcode`
-
 > 5. `time`, it's needed for control and limit the action on QR-codes / `time`, потрібен для контролю та обмеження дій над QR-кодами
 ### You can install all of this module for 1 command / Ви можете встановити усі ці модулі з допомоги 1 команди:
 ```
